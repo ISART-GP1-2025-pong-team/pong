@@ -14,7 +14,7 @@ LDFLAGS+=-L../externals/$(TARGET)/bin -Wl,-rpath,$(LD_LIBRARY_PATH)
 LDLIBS=-lgp -lglfw
 endif
 
-OBJS=src/main.o src/game.o src/game_functions.o
+OBJS=src/main.o src/game.o src/game_functions.o src/vector2.o src/intersection.o
 DEPS=$(OBJS:.o=.d)
 
 .PHONY: all clean

@@ -7,14 +7,19 @@
 
 #include "game.h"
 
+const int   WIDTH  = 400;
+const int   HEIGHT = 200;
+const int   SCALE  = 4;
+const char* TITLE  = "pong";
+
 void render_player(GPLib* gp, const player_t* player)
 {
-    gpDrawRectFilled(gp, (GPRect){player->x, player->y, PLAYER_WIDTH, PLAYER_HEIGHT}, GP_CBLACK);
+    gpDrawRectFilled(gp, (GPRect){player->playerPos.x, HEIGHT - player->playerPos.y, PLAYER_WIDTH, PLAYER_HEIGHT}, GP_CBLACK);
 }
 
 void render_ball(GPLib* gp, const ball_t* ball)
 {
-    gpDrawCircleFilled(gp, (GPVector2){ball->x, ball->y}, BALL_RADIUS, GP_CBLACK);
+    gpDrawCircleFilled(gp, (GPVector2){ball->ballPos.x, HEIGHT - ball->ballPos.y}, BALL_RADIUS, GP_CBLACK);
 }
 /*
 void render_ball(GPLib* gp, const ball_t* ball)
@@ -31,18 +36,13 @@ void game_render(GPLib* gp, const game_t* game)
         const player_t* player2 = &game->player2;
         render_player(gp, player2);
     }
-
+    
     const ball_t* ball = &game->ball;
     render_ball(gp, ball); 
 }
 
 int main(int argc, char* argv[])
 {
-    const int   WIDTH  = 400;
-    const int   HEIGHT = 200;
-    const int   SCALE  = 4;
-    const char* TITLE  = "Invaders";
-
     // Init system
     GPLib* gp = gpInit(WIDTH * SCALE, HEIGHT * SCALE, TITLE, GP_VSYNC_ON);
     if (gp == NULL)
@@ -62,6 +62,7 @@ int main(int argc, char* argv[])
         GP_KEY_DOWN,
         GP_KEY_W,
         GP_KEY_S,
+        GP_KEY_SPACE,
     };
 
     // Main loop

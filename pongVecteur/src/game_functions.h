@@ -8,6 +8,7 @@ float random_float(float min, float max);
 
 // Player should stay inside the screen
 void move_player(game_t* game, const game_inputs_t* inputs);
+//bool point_inside_rect(float x, float y, float y2, float rx, float ry, float rw, float rh);
 
 void ball_collision(game_t* game);
 void ball_collision_player(game_t* game);
